@@ -18,6 +18,15 @@ body {
     text-transform: uppercase;
   }
 
+  .saludo {
+    padding-left: 20px;
+    color: #ffffff;
+    font-weight: normal;
+    font-size: 40px;
+    font-family: monospace;
+    text-transform: uppercase;
+  }
+
   .h2 {
     padding-left: 20px;
     color: #ffffff;
