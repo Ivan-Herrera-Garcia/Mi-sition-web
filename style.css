@@ -10,6 +10,7 @@ body {
 }
 
 .h1 {
+    white-space: pre-line;
     padding-left: 20px;
     color: #ffffff;
     font-weight: normal;
