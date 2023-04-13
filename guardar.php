@@ -6,22 +6,25 @@ $dbname = "sitio-web";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-if ($conn->connect_error) {
-  die("Error de conexión: " . $conn->connect_error);
+// Verificar si la conexión se ha establecido correctamente
+if (!$conn) {
+    die("La conexión ha fallado: " . mysqli_connect_error());
 }
 
-// Obtiene el texto ingresado en el formulario
-$texto = $_POST["texto"];
-$correo = $_POST["correo"];
+// Procesar los datos enviados desde el formulario HTML
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $correo = $_POST["correo"];
+    $cuerpo = $_POST["cuerpo"];
 
-// Guarda el texto en la tabla "textos"
-$sql = "INSERT INTO usuarios (correo, cuerpo) VALUES ('$correo', '$texto')";
-if (mysqli_query($conn, $sql)) {
-  echo "Nuevo registro creado correctamente";
-} else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    // Insertar los datos en la tabla de la base de datos
+    $sql = "INSERT INTO informacion (correo, cuerpo) VALUES ('$correo', '$cuerpo')";
+    if (mysqli_query($conn, $sql)) {
+        echo "El mensaje se ha guardado correctamente";
+    } else {
+        echo "Ha ocurrido un error al guardar el mensaje: " . mysqli_error($conn);
+    }
 }
 
-// Cierra la conexión a la base de datos
-$conn->close();
+// Cerrar la conexión con la base de datos
+mysqli_close($conn);
 ?>
