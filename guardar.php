@@ -1,14 +1,10 @@
 <?php
-/*$servername = "aws.connect.psdb.cloud";
-$username = "6pix5nw02tg5ybzlanog";
-$password = "pscale_pw_myIPDcBe86dEOnarbl7J1gwb010njhrcVU3Gnt6utcR";
+$servername = "aws.connect.psdb.cloud";
+$username = "lcry2avnbkc3qbr4qlux";
+$password = "pscale_pw_1UzcNtcXUjikr4Ta0sFWB13klnUrTbcrKWLJ6ubn2qo";
 $dbname = "sitio-web";
-*/
-$conn = mysqli_init();
-$conn->ssl_set(NULL, NULL, "/etc/ssl/certs/ca-certificates.crt", NULL, NULL);
-$conn->real_connect($_ENV["HOST"], $_ENV["USERNAME"], $_ENV["PASSWORD"], $_ENV["DATABASE"]);
-// Crea la conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
+
+$conn = mysqli_connect($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
   die("Error de conexión: " . $conn->connect_error);
@@ -19,11 +15,11 @@ $texto = $_POST["texto"];
 $correo = $_POST["correo"];
 
 // Guarda el texto en la tabla "textos"
-$sql = "INSERT INTO informacion VALUES ('$correo','$texto')";
-if ($conn->query($sql) === TRUE) {
-  echo "El texto se guardó correctamente en la base de datos.";
+$sql = "INSERT INTO usuarios (correo, cuerpo) VALUES ('$correo', '$texto')";
+if (mysqli_query($conn, $sql)) {
+  echo "Nuevo registro creado correctamente";
 } else {
-  echo "Error al guardar el texto en la base de datos: " . $conn->error;
+  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
 // Cierra la conexión a la base de datos
