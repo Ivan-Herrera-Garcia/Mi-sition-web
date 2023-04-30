@@ -174,7 +174,7 @@ a {
 	padding: 0px;
 	width: 400%;
 	
-	animation: slide 15s infinite alternate ease-in-out;
+	animation: slide 8s infinite alternate ease-in-out;
 }
 
 .slider-frame li {
